@@ -1,0 +1,52 @@
+<app-child [selected]="selected" (valueUpdate)="getUpdatedvalue($event)"></app-child>
+<hr />
+<p-panel header="User List">
+    <p-scrollPanel [style]="{width: '100%', height: '200px'}">
+        <p-table [value]="data$|async" dataKey="id" [(selection)]="selected">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>User Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Contact</th>
+                    <th>Gender </th>
+                    <th>Description</th>
+                    <th style="width:8em">Edit</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-ri="rowIndex">
+                <tr> <td>
+    {{rowData.username}}
+</td>
+                    <td>
+                        {{rowData.firstName}}
+                    </td>
+                    <td>
+                        {{rowData.lastName}}
+                    </td>
+
+                    <td>
+                        {{rowData.contact|usphone}}
+                    </td>
+
+                    <td>
+                        {{rowData.gender }}
+                    </td>
+                    <td>
+                        {{rowData.description}}
+                    </td>
+                    <td>
+                        <p-tableRadioButton [value]="rowData" (click)="onRowSelect(selected)"></p-tableRadioButton>
+                    </td>
+
+
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-scrollPanel>
+</p-panel>
+
+
+
+
+

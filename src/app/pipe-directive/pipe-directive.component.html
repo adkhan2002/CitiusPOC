@@ -1,0 +1,30 @@
+ 
+
+    <p-panel header="Demo">
+        <p-card>
+            <p-header>
+                Enter the phone number
+            </p-header>
+            <form [formGroup]="checkoutForm">
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+
+                        <div class="ui-grid-col-4">
+                            <input type="text" autocomplete="off" formControlName="phone" id="phone" pInputText placeholder="enter a phone number" />
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <p-message severity="error" [text]="checkoutForm.controls['phone'].errors['required'] ? 'phone is required' : checkoutForm.controls['phone'].errors['maxlength'] ? 'Number can not be more the 10 characters' : ''"
+                                       *ngIf="!checkoutForm.controls['phone'].valid && checkoutForm.controls['phone'].dirty">
+
+                            </p-message>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <p-footer>
+                Number in US phone format is: {{Number}}
+            </p-footer>
+        </p-card>
+    </p-panel>
+ 
+

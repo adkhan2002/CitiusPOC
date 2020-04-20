@@ -1,0 +1,19 @@
+<section *ngIf="currentUser">
+    <!--<nav class="navbar navbar-expand navbar-d">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link"  (click)="logout()"> <i class="pi pi-power-off"></i>Logout</a>
+        </div>
+    </nav>-->
+    <p-tabMenu [model]="NavItems" [activeItem]="NavItems[0]"></p-tabMenu>
+
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-12 offset-sm--2" style="padding-top: 0.5em;">
+            <alert></alert>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+

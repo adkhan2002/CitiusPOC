@@ -1,0 +1,69 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+    <p-panel header={{title}}>
+
+       
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">
+                        <input pInputText type="text" formControlName="firstname" placeholder="First name is required" />
+                        <br />
+                        <p-message severity="error" text="Firstname is required" *ngIf="!userform.controls['firstname'].valid&&userform.controls['firstname'].dirty"></p-message>
+
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input pInputText type="text" formControlName="lastname" placeholder="Last name is required" />
+                        <br />
+                        <p-message severity="error" text="Lastname is required" *ngIf="!userform.controls['lastname'].valid&&userform.controls['lastname'].dirty"></p-message>
+
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+
+                    <div class="ui-grid-col-6">
+                        <input pInputText type="text" formControlName="username" placeholder="User name is required" />
+                        <br />
+                        <p-message severity="error" text="Username is required" *ngIf="!userform.controls['username'].valid&&userform.controls['username'].dirty"></p-message>
+
+                    </div>
+                    <br />
+                    <div class="ui-grid-col-6">
+                        <input pInputText type="number" formControlName="contact" placeholder="Contact is required" />
+                        <br />
+                        <p-message severity="error" [text]="userform.controls['contact'].errors['required'] ? 'Contact is required' : userform.controls['contact'].errors['minlength'] ? 'Must be 10  characters' : ''"
+                                   *ngIf="!userform.controls['contact'].valid&&userform.controls['contact'].dirty"></p-message>
+                    </div>
+
+                </div>
+
+
+                <div class="ui-grid-row">
+
+                    <div class="ui-grid-col-6">
+                        <textarea pInputTextarea type="text" placeholder="Enter description" formControlName="description"></textarea>
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <p-dropdown [options]="genders" formControlName="gender"></p-dropdown>
+                        <br />
+                        <p-message severity="error" text="Gender is required" *ngIf="!userform.controls['gender'].valid&&userform.controls['gender'].dirty"></p-message>
+                    </div>
+
+                </div> 
+            </div>
+        
+        <p-footer>
+            <button type="submit" [disabled]="!userform.valid" pButton icon="pi pi-plus" label="Submit" class="ui-button-info" style="margin-right: .25em"></button>
+            <button (click)="reset()" pButton type="button" icon="pi pi-reset" label="Reset" class="ui-button-danger"></button>
+        </p-footer>
+    </p-panel>
+</form>
+
+
+
+
+
+
+
+
