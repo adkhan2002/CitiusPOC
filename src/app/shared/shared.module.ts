@@ -20,10 +20,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { CompareDirective } from './compare.directive';
+import { CanDeactivateGuard } from '../_helpers/can-deactivate.guard';
 
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 const modules = [
+    ConfirmDialogModule, 
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
@@ -84,7 +87,9 @@ const declaration = [UsphonePipe, DigitlenghtvalidatorDirective, CompareDirectiv
          
     ],
     providers: [
-        MessageService
+        MessageService,
+        CanDeactivateGuard,
+        ConfirmationService
     ]
 })
 export class SharedModule { }

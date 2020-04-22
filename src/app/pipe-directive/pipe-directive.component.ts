@@ -1,21 +1,20 @@
-import { Component, OnInit, OnDestroy, HostListener, ElementRef } from '@angular/core';
-import { Subscription, Observable, of } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { User } from '../_models/user';
+import { Component, OnInit,  HostListener, OnDestroy } from '@angular/core';
+import { Subscription, Observable, of } from 'rxjs'; 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsphonePipe } from '../shared/usphone.pipe';
+import { CanDeactivateService } from '../_services/can-deactivate.service';
  
 @Component({
     selector: 'app-pipedirective',
     templateUrl: './pipe-directive.component.html',
-    styleUrls: ['./pipe-directive.component.css']
+    styleUrls: ['./pipe-directive.component.css'],
+    providers: [CanDeactivateService]
 })
-export class PipeDirectiveComponent implements OnInit {
-    Number: string = "";
-
-    checkoutForm: FormGroup;
-    
-    constructor(private formBuilder: FormBuilder, private _el: ElementRef) { 
+export class PipeDirectiveComponent implements OnInit, OnDestroy {
+    Number: string = ""; 
+    checkoutForm: FormGroup; 
+    actionsSubscription: Subscription;
+    constructor(private formBuilder: FormBuilder, private canDeactivateService: CanDeactivateService) { 
         this.checkoutForm = this.formBuilder.group({
             phone: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10), Validators.max(9999999999)])),
         }); 
@@ -39,5 +38,13 @@ export class PipeDirectiveComponent implements OnInit {
         }
     }
 
-   
+    canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+        this.canDeactivateService.requestCanDeactivate(); 
+        return of(window.confirm('do u want to leave'));
+        
+    }
+
+    ngOnDestroy() {
+      
+    }
 }

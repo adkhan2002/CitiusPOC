@@ -1,6 +1,6 @@
 
     <p-panel header="User List">
-        <p-table [columns]="cols" [value]="data$|async">
+        <p-table [columns]="cols" [value]="this.data">
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns">
